@@ -1,4 +1,18 @@
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0 },
+};
 
 const TaskSection = () => {
   const days = [
@@ -11,44 +25,63 @@ const TaskSection = () => {
   ];
 
   return (
-    <div className="flex items-stretch gap-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="flex items-stretch gap-4"
+    >
       {/* Calendar widget */}
-      <div className="neo-card p-5 flex-shrink-0">
+      <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }} className="neo-card p-5 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
-          <button className="p-1 hover:opacity-70"><ChevronLeft className="w-4 h-4 text-muted-foreground" /></button>
+          <motion.button whileHover={{ x: -2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronLeft className="w-4 h-4 text-muted-foreground" /></motion.button>
           <span className="text-sm font-semibold text-foreground">Tue, December 19</span>
-          <button className="p-1 hover:opacity-70"><ChevronRight className="w-4 h-4 text-muted-foreground" /></button>
+          <motion.button whileHover={{ x: 2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronRight className="w-4 h-4 text-muted-foreground" /></motion.button>
         </div>
-        <div className="flex gap-2">
+        <motion.div variants={container} initial="hidden" animate="show" className="flex gap-2">
           {days.map((d) => (
-            <div
+            <motion.div
               key={d.day}
-              className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all ${
-                d.active
-                  ? "gradient-blue text-primary-foreground"
-                  : "hover:bg-accent"
+              variants={item}
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl cursor-pointer transition-colors ${
+                d.active ? "gradient-blue text-primary-foreground" : "hover:bg-accent"
               }`}
             >
               <span className={`text-xs font-medium ${d.active ? "text-primary-foreground" : "text-muted-foreground"}`}>{d.day}</span>
               <span className={`text-sm font-bold ${d.active ? "text-primary-foreground" : "text-foreground"}`}>{d.num}</span>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Show my tasks button */}
-      <button className="neo-card flex-1 gradient-blue flex items-center justify-center gap-3 hover:opacity-90 transition-opacity group">
+      <motion.button
+        whileHover={{ scale: 1.02, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+        className="neo-card flex-1 gradient-blue flex items-center justify-center gap-3 group"
+      >
         <span className="text-primary-foreground font-semibold text-lg">Show my Tasks</span>
-        <div className="w-8 h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center group-hover:bg-primary-foreground/30 transition-colors">
+        <motion.div
+          animate={{ x: [0, 4, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          className="w-8 h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center"
+        >
           <ChevronRight className="w-5 h-5 text-primary-foreground" />
-        </div>
-      </button>
+        </motion.div>
+      </motion.button>
 
       {/* Calendar icon button */}
-      <button className="neo-card p-5 flex items-center justify-center hover:opacity-80 transition-opacity flex-shrink-0">
+      <motion.button
+        whileHover={{ scale: 1.08, rotate: 5 }}
+        whileTap={{ scale: 0.95 }}
+        className="neo-card p-5 flex items-center justify-center flex-shrink-0"
+      >
         <Calendar className="w-6 h-6 text-primary" />
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 };
 
