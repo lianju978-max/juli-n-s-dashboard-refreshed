@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 
 const container = {
@@ -14,15 +14,24 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-const TaskSection = () => {
-  const days = [
-    { day: "Mon", num: 18, active: false },
-    { day: "Tue", num: 19, active: true },
-    { day: "Wed", num: 20, active: false },
-    { day: "Thu", num: 21, active: false },
-    { day: "Fri", num: 22, active: false },
-    { day: "Sat", num: 23, active: false },
-  ];
+interface Props {
+  onAddTransaction: () => void;
+}
+
+const TaskSection = ({ onAddTransaction }: Props) => {
+  const now = new Date();
+  const dayNames = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  
+  const days = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date(now);
+    d.setDate(now.getDate() - now.getDay() + 1 + i); // Start from Monday
+    return {
+      day: dayNames[d.getDay()],
+      num: d.getDate(),
+      active: d.toDateString() === now.toDateString(),
+    };
+  });
 
   return (
     <motion.div
@@ -35,7 +44,9 @@ const TaskSection = () => {
       <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }} className="neo-card p-5 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
           <motion.button whileHover={{ x: -2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronLeft className="w-4 h-4 text-muted-foreground" /></motion.button>
-          <span className="text-sm font-semibold text-foreground">Tue, December 19</span>
+          <span className="text-sm font-semibold text-foreground">
+            {dayNames[now.getDay()]}, {monthNames[now.getMonth()]} {now.getDate()}
+          </span>
           <motion.button whileHover={{ x: 2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronRight className="w-4 h-4 text-muted-foreground" /></motion.button>
         </div>
         <motion.div variants={container} initial="hidden" animate="show" className="flex gap-2">
@@ -56,14 +67,16 @@ const TaskSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Show my tasks button */}
+      {/* Add transaction button */}
       <motion.button
         whileHover={{ scale: 1.02, y: -2 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: "spring", stiffness: 400, damping: 15 }}
+        onClick={onAddTransaction}
         className="neo-card flex-1 gradient-blue flex items-center justify-center gap-3 group"
       >
-        <span className="text-primary-foreground font-semibold text-lg">Show my Tasks</span>
+        <Plus className="w-5 h-5 text-primary-foreground" />
+        <span className="text-primary-foreground font-semibold text-lg">Agregar Transacción</span>
         <motion.div
           animate={{ x: [0, 4, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
