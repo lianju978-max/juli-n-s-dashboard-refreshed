@@ -1,7 +1,15 @@
-import { Menu, Search, Mic, Plus, HelpCircle } from "lucide-react";
+import { Menu, Search, Mic, Plus, HelpCircle, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 
-const DashboardHeader = () => {
+interface Props {
+  onAddTransaction: () => void;
+}
+
+const DashboardHeader = ({ onAddTransaction }: Props) => {
+  const { user, signOut } = useAuth();
+  const displayName = user?.email?.split("@")[0] ?? "Usuario";
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -50,7 +58,12 @@ const DashboardHeader = () => {
           <Mic className="w-4 h-4 text-muted-foreground" />
         </motion.button>
 
-        <motion.button whileHover={{ scale: 1.1, rotate: 90 }} whileTap={{ scale: 0.9 }} className="gradient-blue p-2.5 rounded-xl transition-opacity">
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 90 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={onAddTransaction}
+          className="gradient-blue p-2.5 rounded-xl transition-opacity"
+        >
           <Plus className="w-4 h-4 text-primary-foreground" />
         </motion.button>
 
@@ -61,14 +74,23 @@ const DashboardHeader = () => {
           className="flex items-center gap-3 ml-2"
         >
           <div className="text-right">
-            <p className="text-sm font-semibold text-foreground">Dwayne Tatum</p>
-            <p className="text-xs text-muted-foreground">CEO Assistant</p>
+            <p className="text-sm font-semibold text-foreground capitalize">{displayName}</p>
+            <p className="text-xs text-muted-foreground">Personal Finance</p>
           </div>
           <motion.div whileHover={{ scale: 1.1 }} className="w-10 h-10 rounded-xl overflow-hidden neo-card-sm">
             <div className="w-full h-full gradient-blue flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">DT</span>
+              <span className="text-primary-foreground font-bold text-sm">{displayName.slice(0, 2).toUpperCase()}</span>
             </div>
           </motion.div>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={signOut}
+            className="neo-card-sm p-2 transition-opacity"
+            title="Cerrar sesión"
+          >
+            <LogOut className="w-4 h-4 text-muted-foreground" />
+          </motion.button>
         </motion.div>
       </div>
     </motion.header>
