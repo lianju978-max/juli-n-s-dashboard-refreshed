@@ -3,7 +3,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import TaskSection from "@/components/dashboard/TaskSection";
 import PaymentWidgets from "@/components/dashboard/PaymentWidgets";
 import AnnualProfits from "@/components/dashboard/AnnualProfits";
-import ActivityManager from "@/components/dashboard/ActivityManager";
+import TransactionHistory from "@/components/dashboard/TransactionHistory";
 import RightSideWidgets from "@/components/dashboard/RightSideWidgets";
 import AddTransactionDialog from "@/components/dashboard/AddTransactionDialog";
 import AddSavingsGoalDialog from "@/components/dashboard/AddSavingsGoalDialog";
@@ -23,7 +23,7 @@ const Index = () => {
           <PaymentWidgets />
           <div className="flex gap-4">
             <AnnualProfits />
-            <ActivityManager />
+            <TransactionHistory />
           </div>
         </div>
 
