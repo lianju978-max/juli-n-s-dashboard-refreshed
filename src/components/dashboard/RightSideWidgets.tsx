@@ -23,7 +23,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
   const savingsRateClamped = Math.max(0, Math.min(100, savingsRate));
 
   return (
-    <div className="flex flex-col gap-4 w-72 flex-shrink-0">
+    <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 lg:w-72 lg:flex-shrink-0">
       {/* Savings Rate */}
       <motion.div custom={0} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4">
         <div className="flex items-center justify-between mb-2">
@@ -31,7 +31,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
           <TrendingUp className="w-4 h-4 text-primary" />
         </div>
         <div className="flex items-center gap-3">
-          <div className="relative w-14 h-14">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14">
             <svg viewBox="0 0 60 60" className="w-full h-full -rotate-90">
               <circle cx="30" cy="30" r="24" fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="6" />
               <motion.circle
@@ -44,7 +44,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-bold text-foreground">{savingsRateClamped}%</span>
+              <span className="text-[10px] sm:text-xs font-bold text-foreground">{savingsRateClamped}%</span>
             </div>
           </div>
           <div>
@@ -75,7 +75,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
               transition={{ delay: 0.6 + i * 0.1 }}
               className="text-center"
             >
-              <p className="text-lg font-bold text-foreground">{t.val}</p>
+              <p className="text-base sm:text-lg font-bold text-foreground">{t.val}</p>
               <p className="text-[10px] text-muted-foreground">{t.label}</p>
             </motion.div>
           ))}
@@ -83,7 +83,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
       </motion.div>
 
       {/* Savings Goals */}
-      <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4">
+      <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 col-span-2 lg:col-span-1">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Target className="w-4 h-4 text-primary" />
