@@ -23,7 +23,7 @@ const Index = () => {
           <PaymentWidgets />
           <div className="flex gap-4">
             <AnnualProfits />
-            <ActivityManager />
+            <TransactionHistory />
           </div>
         </div>
 
