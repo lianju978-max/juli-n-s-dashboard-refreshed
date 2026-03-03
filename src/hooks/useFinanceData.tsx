@@ -109,10 +109,11 @@ export const useAddSavingsGoal = () => {
 export const useUpdateSavingsGoal = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, current_amount }: { id: string; current_amount: number }) => {
+    mutationFn: async (goal: { id: string; name?: string; target_amount?: number; current_amount?: number; deadline?: string | null }) => {
+      const { id, ...updates } = goal;
       const { data, error } = await supabase
         .from("savings_goals")
-        .update({ current_amount })
+        .update(updates)
         .eq("id", id)
         .select()
         .single();
@@ -120,6 +121,46 @@ export const useUpdateSavingsGoal = () => {
       return data;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["savings_goals"] }),
+  });
+};
+
+export const useDeleteSavingsGoal = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("savings_goals").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["savings_goals"] }),
+  });
+};
+
+export const useUpdateTransaction = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (tx: { id: string; type?: string; amount?: number; description?: string; date?: string; category_id?: string | null }) => {
+      const { id, ...updates } = tx;
+      const { data, error } = await supabase
+        .from("transactions")
+        .update(updates)
+        .eq("id", id)
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["transactions"] }),
+  });
+};
+
+export const useDeleteTransaction = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("transactions").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["transactions"] }),
   });
 };
 
