@@ -110,6 +110,8 @@ const AnnualProfits = () => {
         </motion.div>
       </div>
     </motion.div>
+    <FinancialDetailDialog open={showDetail} onClose={() => setShowDetail(false)} />
+    </>
   );
 };
 
