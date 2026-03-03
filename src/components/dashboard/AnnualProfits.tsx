@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useFinanceSummary } from "@/hooks/useFinanceData";
+import FinancialDetailDialog from "./FinancialDetailDialog";
 
 const AnnualProfits = () => {
+  const [showDetail, setShowDetail] = useState(false);
   const { totalIncome, totalExpenses, balance } = useFinanceSummary();
   const total = totalIncome + totalExpenses || 1;
 
