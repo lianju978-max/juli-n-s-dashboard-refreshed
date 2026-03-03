@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useFinanceSummary } from "@/hooks/useFinanceData";
+import FinancialDetailDialog from "./FinancialDetailDialog";
 
 const AnnualProfits = () => {
+  const [showDetail, setShowDetail] = useState(false);
   const { totalIncome, totalExpenses, balance } = useFinanceSummary();
   const total = totalIncome + totalExpenses || 1;
 
@@ -22,6 +25,7 @@ const AnnualProfits = () => {
   };
 
   return (
+    <>
     <motion.div
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
@@ -29,10 +33,10 @@ const AnnualProfits = () => {
       whileHover={{ y: -4 }}
       className="neo-card p-5"
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-bold text-foreground">Resumen Financiero</h3>
-        <button className="text-xs text-muted-foreground hover:text-foreground">•••</button>
-      </div>
+      <button onClick={() => setShowDetail(true)} className="flex items-center justify-between mb-4 w-full text-left group">
+        <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Resumen Financiero</h3>
+        <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">Ver detalle →</span>
+      </button>
 
       <div className="flex items-center justify-center mb-4">
         <div className="relative">
@@ -107,6 +111,8 @@ const AnnualProfits = () => {
         </motion.div>
       </div>
     </motion.div>
+    <FinancialDetailDialog open={showDetail} onClose={() => setShowDetail(false)} />
+    </>
   );
 };
 
