@@ -44,7 +44,7 @@ const AnnualProfits = () => {
             <circle cx="90" cy="90" r={radius1} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
             <motion.circle
               cx="90" cy="90" r={radius1} fill="none"
-              stroke="url(#blueGrad1)" strokeWidth="12"
+              stroke="url(#incomeGrad)" strokeWidth="12"
               strokeLinecap="round"
               transform="rotate(-90 90 90)"
               initial={{ strokeDasharray: circumference1, strokeDashoffset: circumference1 }}
@@ -54,7 +54,7 @@ const AnnualProfits = () => {
             <circle cx="90" cy="90" r={radius2} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
             <motion.circle
               cx="90" cy="90" r={radius2} fill="none"
-              stroke="url(#blueGrad2)" strokeWidth="12"
+              stroke="url(#expenseGrad)" strokeWidth="12"
               strokeLinecap="round"
               transform="rotate(-90 90 90)"
               initial={{ strokeDasharray: circumference2, strokeDashoffset: circumference2 }}
@@ -64,7 +64,7 @@ const AnnualProfits = () => {
             <circle cx="90" cy="90" r={radius3} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
             <motion.circle
               cx="90" cy="90" r={radius3} fill="none"
-              stroke="url(#blueGrad3)" strokeWidth="12"
+              stroke="url(#balanceGrad)" strokeWidth="12"
               strokeLinecap="round"
               transform="rotate(-90 90 90)"
               initial={{ strokeDasharray: circumference3, strokeDashoffset: circumference3 }}
@@ -72,17 +72,17 @@ const AnnualProfits = () => {
               transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
             />
             <defs>
-              <linearGradient id="blueGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="incomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="hsl(211, 100%, 50%)" />
                 <stop offset="100%" stopColor="hsl(200, 100%, 60%)" />
               </linearGradient>
-              <linearGradient id="blueGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(200, 100%, 60%)" />
-                <stop offset="100%" stopColor="hsl(177, 69%, 50%)" />
+              <linearGradient id="expenseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(0, 84%, 55%)" />
+                <stop offset="100%" stopColor="hsl(15, 90%, 60%)" />
               </linearGradient>
-              <linearGradient id="blueGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="balanceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="hsl(177, 69%, 41%)" />
-                <stop offset="100%" stopColor="hsl(190, 80%, 55%)" />
+                <stop offset="100%" stopColor="hsl(160, 70%, 50%)" />
               </linearGradient>
             </defs>
           </svg>
@@ -102,12 +102,12 @@ const AnnualProfits = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
           <div className="w-2 h-2 rounded-full bg-primary mx-auto mb-1"></div>
           <p className="text-xs text-muted-foreground">Ingresos</p>
-          <p className="text-sm font-bold text-foreground">{fmt(totalIncome)}</p>
+          <p className="text-sm font-bold text-primary">{fmt(totalIncome)}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-          <div className="w-2 h-2 rounded-full bg-secondary mx-auto mb-1"></div>
+          <div className="w-2 h-2 rounded-full bg-destructive mx-auto mb-1"></div>
           <p className="text-xs text-muted-foreground">Gastos</p>
-          <p className="text-sm font-bold text-foreground">{fmt(totalExpenses)}</p>
+          <p className="text-sm font-bold text-destructive">{fmt(totalExpenses)}</p>
         </motion.div>
       </div>
     </motion.div>
