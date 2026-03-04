@@ -102,12 +102,12 @@ const AnnualProfits = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
           <div className="w-2 h-2 rounded-full bg-primary mx-auto mb-1"></div>
           <p className="text-xs text-muted-foreground">Ingresos</p>
-          <p className="text-sm font-bold text-foreground">{fmt(totalIncome)}</p>
+          <p className="text-sm font-bold text-primary">{fmt(totalIncome)}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-          <div className="w-2 h-2 rounded-full bg-secondary mx-auto mb-1"></div>
+          <div className="w-2 h-2 rounded-full bg-destructive mx-auto mb-1"></div>
           <p className="text-xs text-muted-foreground">Gastos</p>
-          <p className="text-sm font-bold text-foreground">{fmt(totalExpenses)}</p>
+          <p className="text-sm font-bold text-destructive">{fmt(totalExpenses)}</p>
         </motion.div>
       </div>
     </motion.div>
