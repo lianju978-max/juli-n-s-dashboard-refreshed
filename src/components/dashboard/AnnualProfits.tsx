@@ -64,7 +64,7 @@ const AnnualProfits = () => {
             <circle cx="90" cy="90" r={radius3} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
             <motion.circle
               cx="90" cy="90" r={radius3} fill="none"
-              stroke="url(#blueGrad3)" strokeWidth="12"
+              stroke="url(#balanceGrad)" strokeWidth="12"
               strokeLinecap="round"
               transform="rotate(-90 90 90)"
               initial={{ strokeDasharray: circumference3, strokeDashoffset: circumference3 }}
