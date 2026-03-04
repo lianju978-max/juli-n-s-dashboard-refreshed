@@ -72,17 +72,17 @@ const AnnualProfits = () => {
               transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
             />
             <defs>
-              <linearGradient id="blueGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="incomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="hsl(211, 100%, 50%)" />
                 <stop offset="100%" stopColor="hsl(200, 100%, 60%)" />
               </linearGradient>
-              <linearGradient id="blueGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(200, 100%, 60%)" />
-                <stop offset="100%" stopColor="hsl(177, 69%, 50%)" />
+              <linearGradient id="expenseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(0, 84%, 55%)" />
+                <stop offset="100%" stopColor="hsl(15, 90%, 60%)" />
               </linearGradient>
-              <linearGradient id="blueGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="balanceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="hsl(177, 69%, 41%)" />
-                <stop offset="100%" stopColor="hsl(190, 80%, 55%)" />
+                <stop offset="100%" stopColor="hsl(160, 70%, 50%)" />
               </linearGradient>
             </defs>
           </svg>
