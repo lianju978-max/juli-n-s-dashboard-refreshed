@@ -76,26 +76,27 @@ const TransactionHistory = () => {
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="neo-card p-5 flex-1 flex flex-col"
+        className="neo-card flex flex-1 flex-col overflow-hidden p-5 sm:p-6"
       >
-        {/* Month navigation */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-bold text-foreground">Historial de Registros</h3>
+        <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Movimientos</p>
+            <h3 className="mt-2 text-xl font-extrabold tracking-tight text-foreground">Historial de registros</h3>
+          </div>
           <div className="flex items-center gap-2">
-            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={goToPrev} className="neo-pressed p-1.5">
-              <ChevronLeft className="w-3.5 h-3.5 text-muted-foreground" />
+            <motion.button whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }} onClick={goToPrev} className="neo-card-sm p-2">
+              <ChevronLeft className="h-4 w-4 text-muted-foreground" />
             </motion.button>
-            <span className="text-xs font-semibold text-foreground min-w-[120px] text-center">
+            <span className="min-w-[140px] text-center text-xs font-semibold uppercase tracking-[0.12em] text-foreground">
               {MONTH_NAMES[selectedMonth]} {selectedYear}
             </span>
-            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={goToNext} className="neo-pressed p-1.5">
-              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
+            <motion.button whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }} onClick={goToNext} className="neo-card-sm p-2">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </motion.button>
           </div>
         </div>
 
-        {/* Filter tabs */}
-        <div className="flex gap-1.5 mb-4">
+        <div className="mb-4 flex gap-2">
           {([
             { key: "all", label: "Todos" },
             { key: "income", label: "Ingresos" },
@@ -104,9 +105,9 @@ const TransactionHistory = () => {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`flex-1 py-1.5 text-[11px] font-semibold rounded-lg transition-all ${
+              className={`flex-1 rounded-2xl py-2 text-xs font-semibold transition-all ${
                 filter === f.key
-                  ? "gradient-blue text-primary-foreground"
+                  ? "gradient-blue text-primary-foreground shadow-[var(--shadow-floating)]"
                   : "neo-pressed text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -115,26 +116,24 @@ const TransactionHistory = () => {
           ))}
         </div>
 
-        {/* Monthly summary */}
-        <div className="flex gap-3 mb-4">
-          <div className="neo-pressed flex-1 p-2.5 text-center">
-            <p className="text-[10px] text-muted-foreground">Ingresos</p>
-            <p className="text-sm font-bold text-primary">${fmt(totalIncome)}</p>
+        <div className="mb-5 grid gap-3 sm:grid-cols-3">
+          <div className="neo-inset p-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Ingresos</p>
+            <p className="mt-1 text-lg font-extrabold text-primary">${fmt(totalIncome)}</p>
           </div>
-          <div className="neo-pressed flex-1 p-2.5 text-center">
-            <p className="text-[10px] text-muted-foreground">Gastos</p>
-            <p className="text-sm font-bold text-destructive">${fmt(totalExpenses)}</p>
+          <div className="neo-inset p-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Gastos</p>
+            <p className="mt-1 text-lg font-extrabold text-destructive">${fmt(totalExpenses)}</p>
           </div>
-          <div className="neo-pressed flex-1 p-2.5 text-center">
-            <p className="text-[10px] text-muted-foreground">Balance</p>
-            <p className={`text-sm font-bold ${totalIncome - totalExpenses >= 0 ? "text-primary" : "text-destructive"}`}>
+          <div className="neo-inset p-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Balance</p>
+            <p className={`mt-1 text-lg font-extrabold ${totalIncome - totalExpenses >= 0 ? "text-secondary" : "text-destructive"}`}>
               ${fmt(totalIncome - totalExpenses)}
             </p>
           </div>
         </div>
 
-        {/* Transaction list */}
-        <div className="flex-1 overflow-y-auto max-h-[320px] space-y-3 pr-1">
+        <div className="flex-1 space-y-3 overflow-y-auto pr-1">
           <AnimatePresence mode="wait">
             {grouped.length > 0 ? (
               <motion.div
@@ -142,51 +141,46 @@ const TransactionHistory = () => {
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
-                className="space-y-3"
+                className="space-y-4"
               >
                 {grouped.map(([day, txs]) => (
                   <div key={day}>
-                    <p className="text-[10px] font-semibold text-muted-foreground uppercase mb-1.5">
+                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       {formatDay(day)}
                     </p>
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {txs.map((tx, i) => (
                         <motion.div
                           key={tx.id}
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.04 }}
-                          className="neo-pressed flex items-center gap-3 p-2.5 group"
+                          className="neo-inset group flex items-center gap-3 rounded-[1.15rem] p-3"
                         >
-                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                            tx.type === "income" ? "gradient-blue-light" : "bg-destructive/10"
-                          }`}>
+                          <div className={`flex h-10 w-10 items-center justify-center rounded-2xl flex-shrink-0 ${tx.type === "income" ? "gradient-income" : "gradient-expense"}`}>
                             {tx.type === "income" ? (
-                              <ArrowDownLeft className="w-3.5 h-3.5 text-primary" />
+                              <ArrowDownLeft className="h-4 w-4 text-primary-foreground" />
                             ) : (
-                              <ArrowUpRight className="w-3.5 h-3.5 text-destructive" />
+                              <ArrowUpRight className="h-4 w-4 text-primary-foreground" />
                             )}
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs font-semibold text-foreground truncate">
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-semibold text-foreground">
                               {tx.description || (tx.type === "income" ? "Ingreso" : "Gasto")}
                             </p>
-                            <p className="text-[10px] text-muted-foreground">
+                            <p className="text-[11px] text-muted-foreground">
                               {(tx as any).categories?.name ?? "Sin categoría"}
                             </p>
                           </div>
-                          <span className={`text-xs font-semibold flex-shrink-0 ${
-                            tx.type === "income" ? "text-primary" : "text-destructive"
-                          }`}>
+                          <span className={`text-sm font-extrabold flex-shrink-0 ${tx.type === "income" ? "text-primary" : "text-destructive"}`}>
                             {tx.type === "income" ? "+" : "-"}${fmt(Number(tx.amount))}
                           </span>
-                          {/* Edit/Delete buttons */}
-                          <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
-                            <button onClick={() => setEditTx(tx)} className="p-1 rounded-md hover:bg-accent transition-colors">
-                              <Pencil className="w-3 h-3 text-muted-foreground" />
+                          <div className="flex flex-shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                            <button onClick={() => setEditTx(tx)} className="rounded-lg p-1.5 hover:bg-accent transition-colors">
+                              <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
                             </button>
-                            <button onClick={() => handleDelete(tx.id)} className="p-1 rounded-md hover:bg-destructive/10 transition-colors">
-                              <Trash2 className="w-3 h-3 text-destructive" />
+                            <button onClick={() => handleDelete(tx.id)} className="rounded-lg p-1.5 hover:bg-destructive/10 transition-colors">
+                              <Trash2 className="h-3.5 w-3.5 text-destructive" />
                             </button>
                           </div>
                         </motion.div>
@@ -196,16 +190,16 @@ const TransactionHistory = () => {
                 ))}
               </motion.div>
             ) : (
-              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-10 text-center">
-                <Filter className="w-8 h-8 text-muted-foreground/40 mb-2" />
-                <p className="text-xs text-muted-foreground">No hay registros en {MONTH_NAMES[selectedMonth]} {selectedYear}</p>
+              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-12 text-center">
+                <Filter className="mb-3 h-8 w-8 text-muted-foreground/40" />
+                <p className="text-sm text-muted-foreground">No hay registros en {MONTH_NAMES[selectedMonth]} {selectedYear}</p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-border">
-          <p className="text-[10px] text-muted-foreground text-center">
+        <div className="mt-4 border-t border-border/70 pt-4">
+          <p className="text-center text-[11px] text-muted-foreground">
             {filteredTransactions.length} registro{filteredTransactions.length !== 1 ? "s" : ""} en {MONTH_NAMES[selectedMonth]}
           </p>
         </div>
