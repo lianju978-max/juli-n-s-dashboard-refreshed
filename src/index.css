@@ -6,50 +6,58 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 10%;
+    --background: 210 33% 96%;
+    --foreground: 222 33% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 222 33% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 222 33% 12%;
 
-    --primary: 211 100% 50%;
+    --primary: 212 100% 45%;
     --primary-foreground: 0 0% 100%;
+    --primary-soft: 212 100% 96%;
 
-    --secondary: 177 69% 41%;
+    --secondary: 186 82% 35%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 92%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 210 24% 91%;
+    --muted-foreground: 217 13% 42%;
 
-    --accent: 220 14% 95%;
-    --accent-foreground: 220 20% 10%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 222 33% 12%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 4 84% 54%;
     --destructive-foreground: 0 0% 100%;
+    --destructive-soft: 4 100% 97%;
 
-    --border: 220 14% 90%;
-    --input: 220 14% 90%;
-    --ring: 211 100% 50%;
+    --border: 214 24% 88%;
+    --input: 214 24% 88%;
+    --ring: 212 100% 45%;
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
-    /* Neomorphic shadows */
-    --shadow-neo: 8px 8px 16px hsl(220 20% 88%), -8px -8px 16px hsl(0 0% 100%);
-    --shadow-neo-sm: 4px 4px 8px hsl(220 20% 88%), -4px -4px 8px hsl(0 0% 100%);
-    --shadow-neo-inset: inset 4px 4px 8px hsl(220 20% 90%), inset -4px -4px 8px hsl(0 0% 100%);
-    --shadow-neo-pressed: inset 2px 2px 5px hsl(220 20% 88%), inset -2px -2px 5px hsl(0 0% 100%);
+    --shadow-neo: 18px 18px 40px hsl(214 30% 87% / 0.85), -18px -18px 40px hsl(0 0% 100% / 0.98);
+    --shadow-neo-sm: 10px 10px 24px hsl(214 28% 88% / 0.78), -10px -10px 24px hsl(0 0% 100% / 0.95);
+    --shadow-neo-inset: inset 8px 8px 14px hsl(214 20% 88% / 0.75), inset -8px -8px 16px hsl(0 0% 100% / 0.95);
+    --shadow-neo-pressed: inset 4px 4px 10px hsl(214 20% 86% / 0.78), inset -4px -4px 10px hsl(0 0% 100% / 0.98);
+    --shadow-floating: 0 22px 55px hsl(214 60% 40% / 0.14);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 211 100% 50%;
+    --gradient-primary: linear-gradient(135deg, hsl(212 100% 47%), hsl(196 100% 56%));
+    --gradient-income: linear-gradient(135deg, hsl(212 100% 47%), hsl(193 100% 55%));
+    --gradient-expense: linear-gradient(135deg, hsl(4 84% 54%), hsl(22 100% 56%));
+    --gradient-balance: linear-gradient(135deg, hsl(186 82% 35%), hsl(168 78% 44%));
+    --gradient-surface: radial-gradient(circle at top left, hsl(0 0% 100% / 0.96), hsl(210 45% 97%) 48%, hsl(212 45% 93%) 100%);
+
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 222 33% 12%;
+    --sidebar-primary: 212 100% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 95%;
-    --sidebar-accent-foreground: 220 20% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 211 100% 50%;
+    --sidebar-accent: 210 40% 98%;
+    --sidebar-accent-foreground: 222 33% 12%;
+    --sidebar-border: 214 24% 88%;
+    --sidebar-ring: 212 100% 45%;
   }
 }
 
@@ -60,41 +68,92 @@
 
   body {
     @apply bg-background text-foreground font-manrope antialiased;
+    background-image:
+      radial-gradient(circle at top left, hsl(var(--primary) / 0.1), transparent 26%),
+      radial-gradient(circle at top right, hsl(var(--secondary) / 0.12), transparent 24%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(210 35% 94%));
   }
 }
 
 @layer utilities {
   .neo-card {
-    background: hsl(var(--card));
+    background: var(--gradient-surface);
     box-shadow: var(--shadow-neo);
+    border: 1px solid hsl(var(--border) / 0.65);
     border-radius: var(--radius);
   }
 
   .neo-card-sm {
-    background: hsl(var(--card));
+    background: hsl(var(--card) / 0.9);
     box-shadow: var(--shadow-neo-sm);
+    border: 1px solid hsl(var(--border) / 0.55);
     border-radius: var(--radius);
   }
 
   .neo-inset {
+    background: hsl(var(--accent) / 0.75);
     box-shadow: var(--shadow-neo-inset);
     border-radius: var(--radius);
   }
 
   .neo-pressed {
+    background: hsl(var(--accent) / 0.8);
     box-shadow: var(--shadow-neo-pressed);
-    border-radius: calc(var(--radius) - 4px);
+    border-radius: calc(var(--radius) - 6px);
   }
 
   .gradient-blue {
-    background: linear-gradient(135deg, hsl(211 100% 50%), hsl(200 100% 60%));
+    background: var(--gradient-primary);
   }
 
   .gradient-blue-light {
-    background: linear-gradient(135deg, hsl(211 100% 50% / 0.1), hsl(200 100% 60% / 0.05));
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.16), hsl(var(--secondary) / 0.08));
+  }
+
+  .gradient-income {
+    background: var(--gradient-income);
+  }
+
+  .gradient-expense {
+    background: var(--gradient-expense);
+  }
+
+  .gradient-balance {
+    background: var(--gradient-balance);
   }
 
   .text-teal {
     color: hsl(var(--secondary));
   }
+
+  .dashboard-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dashboard-shell::before,
+  .dashboard-shell::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(24px);
+    pointer-events: none;
+  }
+
+  .dashboard-shell::before {
+    top: 4rem;
+    left: -4rem;
+    width: 14rem;
+    height: 14rem;
+    background: hsl(var(--primary) / 0.12);
+  }
+
+  .dashboard-shell::after {
+    right: -3rem;
+    bottom: 8rem;
+    width: 16rem;
+    height: 16rem;
+    background: hsl(var(--secondary) / 0.12);
+  }
 }
+

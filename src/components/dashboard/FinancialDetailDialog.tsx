@@ -76,111 +76,114 @@ const FinancialDetailDialog = ({ open, onClose }: Props) => {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-2xl w-[95vw] max-h-[85vh] overflow-y-auto neo-card border-border/50">
-        <DialogHeader>
-          <DialogTitle className="text-lg font-bold text-foreground">Detalle Financiero</DialogTitle>
-        </DialogHeader>
-
-        {/* Summary cards */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="neo-pressed p-3 text-center">
-            <p className="text-[10px] text-muted-foreground">Total Ingresos</p>
-            <p className="text-sm font-bold text-primary">{fmt(totals.income)}</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="neo-pressed p-3 text-center">
-            <p className="text-[10px] text-muted-foreground">Total Gastos</p>
-            <p className="text-sm font-bold text-destructive">{fmt(totals.expense)}</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="neo-pressed p-3 text-center">
-            <p className="text-[10px] text-muted-foreground">Balance</p>
-            <p className={`text-sm font-bold ${totals.balance >= 0 ? "text-primary" : "text-destructive"}`}>{fmt(totals.balance)}</p>
-          </motion.div>
+      <DialogContent className="neo-card max-h-[88vh] w-[96vw] max-w-4xl overflow-y-auto border-border/60 p-0">
+        <div className="border-b border-border/70 px-6 py-5">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-extrabold tracking-tight text-foreground">Detalle financiero</DialogTitle>
+          </DialogHeader>
+          <p className="mt-2 text-sm text-muted-foreground">Visualiza la evolución mensual de ingresos y gastos con más contraste y contexto.</p>
         </div>
 
-        <Tabs defaultValue="bars" className="w-full">
-          <TabsList className="w-full mb-4">
-            <TabsTrigger value="bars" className="flex-1 text-xs">Barras</TabsTrigger>
-            <TabsTrigger value="area" className="flex-1 text-xs">Área</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="bars">
-            <div className="h-[300px] sm:h-[350px]">
-              {chartData.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
-                    <XAxis dataKey="monthLabel" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
-                    <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v}`} width={50} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend formatter={(v) => (v === "income" ? "Ingresos" : "Gastos")} wrapperStyle={{ fontSize: 12 }} />
-                    <Bar dataKey="income" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} maxBarSize={40} />
-                    <Bar dataKey="expense" fill="hsl(var(--destructive))" radius={[4, 4, 0, 0]} maxBarSize={40} />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="flex items-center justify-center h-full text-sm text-muted-foreground">Sin datos disponibles</div>
-              )}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="area">
-            <div className="h-[300px] sm:h-[350px]">
-              {chartData.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                    <defs>
-                      <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
-                      </linearGradient>
-                      <linearGradient id="expenseGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
-                    <XAxis dataKey="monthLabel" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
-                    <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v}`} width={50} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend formatter={(v) => (v === "income" ? "Ingresos" : "Gastos")} wrapperStyle={{ fontSize: 12 }} />
-                    <Area type="monotone" dataKey="income" stroke="hsl(var(--primary))" fill="url(#incomeGrad)" strokeWidth={2} />
-                    <Area type="monotone" dataKey="expense" stroke="hsl(var(--destructive))" fill="url(#expenseGrad)" strokeWidth={2} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="flex items-center justify-center h-full text-sm text-muted-foreground">Sin datos disponibles</div>
-              )}
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        {/* Monthly breakdown table */}
-        {chartData.length > 0 && (
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-2 text-muted-foreground font-medium">Mes</th>
-                  <th className="text-right py-2 text-muted-foreground font-medium">Ingresos</th>
-                  <th className="text-right py-2 text-muted-foreground font-medium">Gastos</th>
-                  <th className="text-right py-2 text-muted-foreground font-medium">Balance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chartData.map((row) => (
-                  <tr key={row.sortKey} className="border-b border-border/50 hover:bg-accent/50 transition-colors">
-                    <td className="py-2 font-medium text-foreground">{row.month}</td>
-                    <td className="py-2 text-right text-primary font-medium">{fmt(row.income)}</td>
-                    <td className="py-2 text-right text-destructive font-medium">{fmt(row.expense)}</td>
-                    <td className={`py-2 text-right font-bold ${row.income - row.expense >= 0 ? "text-primary" : "text-destructive"}`}>
-                      {fmt(row.income - row.expense)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="space-y-6 p-6">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="neo-inset p-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Total Ingresos</p>
+              <p className="mt-1 text-lg font-extrabold text-primary">{fmt(totals.income)}</p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="neo-inset p-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Total Gastos</p>
+              <p className="mt-1 text-lg font-extrabold text-destructive">{fmt(totals.expense)}</p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="neo-inset p-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Balance</p>
+              <p className={`mt-1 text-lg font-extrabold ${totals.balance >= 0 ? "text-secondary" : "text-destructive"}`}>{fmt(totals.balance)}</p>
+            </motion.div>
           </div>
-        )}
+
+          <Tabs defaultValue="bars" className="w-full">
+            <TabsList className="mb-4 grid w-full grid-cols-2 rounded-2xl bg-accent/70 p-1">
+              <TabsTrigger value="bars" className="rounded-xl text-xs">Barras</TabsTrigger>
+              <TabsTrigger value="area" className="rounded-xl text-xs">Área</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="bars" className="mt-0">
+              <div className="neo-inset h-[320px] rounded-[1.4rem] p-4 sm:h-[380px]">
+                {chartData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
+                      <XAxis dataKey="monthLabel" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                      <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v}`} width={50} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend formatter={(v) => (v === "income" ? "Ingresos" : "Gastos")} wrapperStyle={{ fontSize: 12 }} />
+                      <Bar dataKey="income" fill="hsl(var(--primary))" radius={[10, 10, 0, 0]} maxBarSize={34} />
+                      <Bar dataKey="expense" fill="hsl(var(--destructive))" radius={[10, 10, 0, 0]} maxBarSize={34} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-sm text-muted-foreground">Sin datos disponibles</div>
+                )}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="area" className="mt-0">
+              <div className="neo-inset h-[320px] rounded-[1.4rem] p-4 sm:h-[380px]">
+                {chartData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
+                      <defs>
+                        <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.35} />
+                          <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                        </linearGradient>
+                        <linearGradient id="expenseGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.35} />
+                          <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
+                      <XAxis dataKey="monthLabel" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                      <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v}`} width={50} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend formatter={(v) => (v === "income" ? "Ingresos" : "Gastos")} wrapperStyle={{ fontSize: 12 }} />
+                      <Area type="monotone" dataKey="income" stroke="hsl(var(--primary))" fill="url(#incomeGrad)" strokeWidth={3} />
+                      <Area type="monotone" dataKey="expense" stroke="hsl(var(--destructive))" fill="url(#expenseGrad)" strokeWidth={3} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-sm text-muted-foreground">Sin datos disponibles</div>
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
+
+          {chartData.length > 0 && (
+            <div className="overflow-x-auto rounded-[1.4rem] border border-border/60 bg-background/50 p-2">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-border/70">
+                    <th className="py-3 text-left font-medium text-muted-foreground">Mes</th>
+                    <th className="py-3 text-right font-medium text-muted-foreground">Ingresos</th>
+                    <th className="py-3 text-right font-medium text-muted-foreground">Gastos</th>
+                    <th className="py-3 text-right font-medium text-muted-foreground">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {chartData.map((row) => (
+                    <tr key={row.sortKey} className="border-b border-border/40 transition-colors hover:bg-accent/50">
+                      <td className="py-3 font-semibold text-foreground">{row.month}</td>
+                      <td className="py-3 text-right font-semibold text-primary">{fmt(row.income)}</td>
+                      <td className="py-3 text-right font-semibold text-destructive">{fmt(row.expense)}</td>
+                      <td className={`py-3 text-right font-extrabold ${row.income - row.expense >= 0 ? "text-secondary" : "text-destructive"}`}>
+                        {fmt(row.income - row.expense)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -1,4 +1,4 @@
-import { CreditCard, ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { CreditCard, ArrowDownLeft, ArrowUpRight, ChartNoAxesCombined } from "lucide-react";
 import { motion } from "framer-motion";
 import { useFinanceSummary } from "@/hooks/useFinanceData";
 
@@ -15,86 +15,113 @@ const fmt = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2,
 
 const PaymentWidgets = () => {
   const { totalIncome, totalExpenses, balance, monthlyData } = useFinanceSummary();
-  const months = Object.entries(monthlyData);
+  const months = Object.entries(monthlyData).slice(-8);
   const maxVal = Math.max(...months.flatMap(([, v]) => [v.income, v.expense]), 1);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-      {/* Balance Card */}
-      <motion.div custom={0} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300 }} className="neo-card p-4 sm:p-5">
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
-          <div className="flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-primary" />
-            <span className="text-sm font-bold text-foreground">Balance</span>
-          </div>
-          <div className="flex gap-1">
-            <div className={`w-2 h-2 rounded-full ${balance >= 0 ? "bg-primary" : "bg-destructive"}`}></div>
-            <div className="w-2 h-2 rounded-full bg-muted"></div>
-            <div className="w-2 h-2 rounded-full bg-muted"></div>
-          </div>
-        </div>
-        <p className="text-xs text-muted-foreground mb-1">Balance actual</p>
-        <p className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4 tracking-wide">${fmt(balance)}</p>
-        <div className="flex gap-2 sm:gap-3 mb-3 sm:mb-4">
-          <motion.div whileHover={{ scale: 1.03 }} className="neo-pressed flex-1 py-2 flex items-center justify-center gap-1.5 text-xs font-medium text-foreground">
-            <ArrowDownLeft className="w-3.5 h-3.5 text-primary" /> Ingresos
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.03 }} className="neo-pressed flex-1 py-2 flex items-center justify-center gap-1.5 text-xs font-medium text-foreground">
-            <ArrowUpRight className="w-3.5 h-3.5 text-destructive" /> Gastos
-          </motion.div>
-        </div>
-        <div className="flex items-center justify-between">
+    <div className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+      <motion.div
+        custom={0}
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover={{ y: -4 }}
+        className="neo-card overflow-hidden p-5 sm:p-6"
+      >
+        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-xs text-muted-foreground">Transacciones</p>
-            <p className="text-sm font-bold text-foreground">{months.length} meses</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Rendimiento</p>
+            <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-foreground">Balance general</h3>
+            <p className="mt-2 text-sm text-muted-foreground">Una lectura más clara de ingresos, gastos y resultado neto.</p>
+          </div>
+          <div className="neo-card-sm flex items-center gap-3 px-4 py-3">
+            <div className={`h-2.5 w-2.5 rounded-full ${balance >= 0 ? "bg-secondary" : "bg-destructive"}`} />
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Estado</p>
+              <p className="text-sm font-bold text-foreground">{balance >= 0 ? "Saldo positivo" : "Saldo negativo"}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              { label: "Balance", value: balance, icon: CreditCard, tone: "gradient-blue" },
+              { label: "Ingresos", value: totalIncome, icon: ArrowDownLeft, tone: "gradient-income" },
+              { label: "Gastos", value: totalExpenses, icon: ArrowUpRight, tone: "gradient-expense" },
+            ].map(({ label, value, icon: Icon, tone }, i) => (
+              <motion.div key={label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 + i * 0.08 }} className="neo-inset p-4">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{label}</span>
+                  <div className={`${tone} flex h-9 w-9 items-center justify-center rounded-2xl text-primary-foreground`}>
+                    <Icon className="h-4 w-4" />
+                  </div>
+                </div>
+                <p className="text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">${fmt(value)}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="neo-inset p-4">
+            <div className="mb-4 flex items-center gap-2">
+              <ChartNoAxesCombined className="h-4 w-4 text-primary" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Pulso mensual</p>
+                <p className="text-sm font-bold text-foreground">Comparativa rápida</p>
+              </div>
+            </div>
+
+            <div className="flex h-40 items-end gap-2">
+              {months.length > 0 ? months.map(([month, vals], i) => (
+                <div key={month} className="flex flex-1 items-end gap-1">
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: `${(vals.income / maxVal) * 100}%` }}
+                    transition={{ delay: 0.55 + i * 0.05, duration: 0.45, ease: "easeOut" }}
+                    className="gradient-income w-full rounded-t-2xl opacity-95"
+                    title={`${month}: ingresos $${fmt(vals.income)}`}
+                  />
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: `${(vals.expense / maxVal) * 100}%` }}
+                    transition={{ delay: 0.6 + i * 0.05, duration: 0.45, ease: "easeOut" }}
+                    className="gradient-expense w-full rounded-t-2xl opacity-85"
+                    title={`${month}: gastos $${fmt(vals.expense)}`}
+                  />
+                </div>
+              )) : Array.from({ length: 6 }).map((_, i) => <div key={i} className="neo-card-sm h-8 flex-1" />)}
+            </div>
+
+            <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground">
+              <span>{months.length === 0 ? "Sin datos aún" : "Últimos meses"}</span>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-primary" />Ingresos</span>
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-destructive" />Gastos</span>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Income/Expenses */}
-      <div className="flex flex-row sm:flex-col gap-3 sm:gap-4">
-        <motion.div custom={1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 flex-1">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-muted-foreground font-medium">Total Ingresos</span>
-          </div>
-          <motion.p initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6, type: "spring" }} className="text-xl sm:text-2xl font-bold text-foreground">${fmt(totalIncome)}</motion.p>
-        </motion.div>
-        <motion.div custom={2} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 flex-1">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-muted-foreground font-medium">Total Gastos</span>
-          </div>
-          <motion.p initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7, type: "spring" }} className="text-xl sm:text-2xl font-bold text-foreground">${fmt(totalExpenses)}</motion.p>
-        </motion.div>
+      <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+        {[
+          { label: "Entrada total", value: totalIncome, helper: "Flujo acumulado", tone: "text-primary", bg: "gradient-income" },
+          { label: "Salida total", value: totalExpenses, helper: "Egresos acumulados", tone: "text-destructive", bg: "gradient-expense" },
+          { label: "Resultado neto", value: balance, helper: "Lo que realmente queda", tone: balance >= 0 ? "text-secondary" : "text-destructive", bg: balance >= 0 ? "gradient-balance" : "gradient-expense" },
+        ].map((card, index) => (
+          <motion.div key={card.label} custom={index + 1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-5">
+            <div className={`${card.bg} mb-4 flex h-11 w-11 items-center justify-center rounded-2xl text-primary-foreground shadow-[var(--shadow-floating)]`}>
+              <CreditCard className="h-5 w-5" />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{card.label}</p>
+            <p className={`mt-2 text-2xl font-extrabold tracking-tight ${card.tone}`}>${fmt(card.value)}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{card.helper}</p>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Mini chart */}
-      <motion.div custom={3} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -4 }} className="neo-card p-4 sm:p-5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
-        <div>
-          <p className="text-xs text-muted-foreground mb-1">Resumen mensual</p>
-          <p className="text-sm font-semibold text-foreground mb-3">Ingresos vs Gastos</p>
-        </div>
-        <div className="flex items-end gap-1 h-16 mb-3">
-          {months.length > 0 ? months.slice(-12).map(([month, vals], i) => (
-            <motion.div
-              key={month}
-              initial={{ height: 0 }}
-              animate={{ height: `${(vals.income / maxVal) * 100}%` }}
-              transition={{ delay: 0.5 + i * 0.05, duration: 0.4, ease: "easeOut" }}
-              className="flex-1 rounded-t-sm gradient-blue opacity-70"
-              title={`${month}: $${fmt(vals.income)}`}
-            />
-          )) : (
-            Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="flex-1 rounded-t-sm bg-muted h-4" />
-            ))
-          )}
-        </div>
-        <p className="text-[10px] text-muted-foreground text-center">
-          {months.length === 0 ? "Sin datos aún" : "Últimos meses"}
-        </p>
-      </motion.div>
     </div>
   );
 };
 
 export default PaymentWidgets;
+

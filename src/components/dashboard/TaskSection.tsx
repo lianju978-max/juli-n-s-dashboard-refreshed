@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Calendar, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, Plus, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const container = {
@@ -22,7 +22,7 @@ const TaskSection = ({ onAddTransaction }: Props) => {
   const now = new Date();
   const dayNames = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
   const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-  
+
   const days = Array.from({ length: 6 }, (_, i) => {
     const d = new Date(now);
     d.setDate(now.getDate() - now.getDay() + 1 + i);
@@ -38,64 +38,78 @@ const TaskSection = ({ onAddTransaction }: Props) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="flex flex-col sm:flex-row items-stretch gap-3 sm:gap-4"
+      className="grid gap-4 xl:grid-cols-[1.35fr_0.75fr]"
     >
-      {/* Calendar widget */}
-      <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }} className="neo-card p-4 sm:p-5 flex-shrink-0">
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
-          <motion.button whileHover={{ x: -2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronLeft className="w-4 h-4 text-muted-foreground" /></motion.button>
-          <span className="text-xs sm:text-sm font-semibold text-foreground">
-            {dayNames[now.getDay()]}, {monthNames[now.getMonth()]} {now.getDate()}
-          </span>
-          <motion.button whileHover={{ x: 2 }} whileTap={{ scale: 0.9 }} className="p-1"><ChevronRight className="w-4 h-4 text-muted-foreground" /></motion.button>
+      <div className="neo-card overflow-hidden p-5 sm:p-6">
+        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">Centro de control</p>
+            <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">Tu panorama financiero de {monthNames[now.getMonth()]}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Revisa movimientos, detecta tendencias y registra nuevas transacciones desde un solo lugar.</p>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 18 }}
+            onClick={onAddTransaction}
+            className="gradient-blue inline-flex items-center justify-center gap-2 rounded-[1.4rem] px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-floating)]"
+          >
+            <Plus className="h-4 w-4" />
+            Nueva transacción
+            <ArrowUpRight className="h-4 w-4" />
+          </motion.button>
         </div>
-        <motion.div variants={container} initial="hidden" animate="show" className="flex gap-1.5 sm:gap-2 overflow-x-auto">
-          {days.map((d) => (
-            <motion.div
-              key={d.day}
-              variants={item}
-              whileHover={{ scale: 1.1, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              className={`flex flex-col items-center gap-1 px-2.5 sm:px-3 py-2 rounded-xl cursor-pointer transition-colors flex-shrink-0 ${
-                d.active ? "gradient-blue text-primary-foreground" : "hover:bg-accent"
-              }`}
-            >
-              <span className={`text-[10px] sm:text-xs font-medium ${d.active ? "text-primary-foreground" : "text-muted-foreground"}`}>{d.day}</span>
-              <span className={`text-xs sm:text-sm font-bold ${d.active ? "text-primary-foreground" : "text-foreground"}`}>{d.num}</span>
+
+        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="neo-inset p-4 sm:p-5">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Semana actual</p>
+                <p className="text-sm font-semibold text-foreground">{dayNames[now.getDay()]}, {now.getDate()} de {monthNames[now.getMonth()]}</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <motion.button whileHover={{ x: -2 }} whileTap={{ scale: 0.9 }} className="neo-card-sm p-2 text-muted-foreground"><ChevronLeft className="h-4 w-4" /></motion.button>
+                <motion.button whileHover={{ x: 2 }} whileTap={{ scale: 0.9 }} className="neo-card-sm p-2 text-muted-foreground"><ChevronRight className="h-4 w-4" /></motion.button>
+              </div>
+            </div>
+
+            <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+              {days.map((d) => (
+                <motion.div
+                  key={`${d.day}-${d.num}`}
+                  variants={item}
+                  whileHover={{ y: -3 }}
+                  className={`rounded-[1.2rem] px-3 py-4 text-center transition-all ${d.active ? "gradient-blue text-primary-foreground shadow-[var(--shadow-floating)]" : "neo-card-sm text-foreground"}`}
+                >
+                  <p className={`text-[11px] font-medium ${d.active ? "text-primary-foreground/80" : "text-muted-foreground"}`}>{d.day}</p>
+                  <p className="mt-1 text-lg font-bold">{d.num}</p>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+          </div>
 
-      {/* Add transaction button */}
-      <motion.button
-        whileHover={{ scale: 1.02, y: -2 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 400, damping: 15 }}
-        onClick={onAddTransaction}
-        className="neo-card flex-1 gradient-blue flex items-center justify-center gap-2 sm:gap-3 group py-4 sm:py-0"
-      >
-        <Plus className="w-5 h-5 text-primary-foreground" />
-        <span className="text-primary-foreground font-semibold text-sm sm:text-lg">Agregar Transacción</span>
-        <motion.div
-          animate={{ x: [0, 4, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center"
-        >
-          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
-        </motion.div>
-      </motion.button>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="neo-card-sm p-4">
+              <div className="mb-3 flex items-center gap-2 text-primary">
+                <Calendar className="h-4 w-4" />
+                <span className="text-xs font-semibold uppercase tracking-[0.18em]">Agenda</span>
+              </div>
+              <p className="text-base font-bold text-foreground">Ordena tus registros</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">Mantén el control diario de ingresos y gastos sin salir del dashboard.</p>
+            </div>
 
-      {/* Calendar icon button - hidden on mobile */}
-      <motion.button
-        whileHover={{ scale: 1.08, rotate: 5 }}
-        whileTap={{ scale: 0.95 }}
-        className="neo-card p-5 items-center justify-center flex-shrink-0 hidden sm:flex"
-      >
-        <Calendar className="w-6 h-6 text-primary" />
-      </motion.button>
+            <div className="neo-card-sm p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Enfoque</p>
+              <p className="mt-2 text-base font-bold text-foreground">Ahorro y visibilidad</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">El layout nuevo prioriza lectura rápida, contraste y acciones clave.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };
 
 export default TaskSection;
+

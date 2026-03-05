@@ -13,22 +13,22 @@ const Index = () => {
   const [showGoalDialog, setShowGoalDialog] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background p-2 sm:p-4">
-      <DashboardHeader onAddTransaction={() => setShowTxDialog(true)} />
-      
-      <div className="flex flex-col lg:flex-row gap-4 px-2 sm:px-4 lg:px-6 mt-4">
-        {/* Main content */}
-        <div className="flex-1 flex flex-col gap-4 min-w-0">
-          <TaskSection onAddTransaction={() => setShowTxDialog(true)} />
-          <PaymentWidgets />
-          <div className="flex flex-col md:flex-row gap-4">
-            <AnnualProfits />
-            <TransactionHistory />
-          </div>
-        </div>
+    <div className="dashboard-shell min-h-screen bg-background px-2 py-3 sm:px-4 sm:py-4">
+      <div className="mx-auto max-w-[1440px] space-y-4 lg:space-y-5">
+        <DashboardHeader onAddTransaction={() => setShowTxDialog(true)} />
 
-        {/* Right sidebar */}
-        <RightSideWidgets onAddGoal={() => setShowGoalDialog(true)} />
+        <div className="grid gap-4 px-2 sm:px-0 xl:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-4 min-w-0">
+            <TaskSection onAddTransaction={() => setShowTxDialog(true)} />
+            <PaymentWidgets />
+            <div className="grid gap-4 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+              <AnnualProfits />
+              <TransactionHistory />
+            </div>
+          </div>
+
+          <RightSideWidgets onAddGoal={() => setShowGoalDialog(true)} />
+        </div>
       </div>
 
       <AddTransactionDialog open={showTxDialog} onClose={() => setShowTxDialog(false)} />
