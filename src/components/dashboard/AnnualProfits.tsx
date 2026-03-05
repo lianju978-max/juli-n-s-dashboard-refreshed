@@ -26,92 +26,100 @@ const AnnualProfits = () => {
 
   return (
     <>
-    <motion.div
-      initial={{ opacity: 0, y: 25 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      whileHover={{ y: -4 }}
-      className="neo-card p-5"
-    >
-      <button onClick={() => setShowDetail(true)} className="flex items-center justify-between mb-4 w-full text-left group">
-        <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Resumen Financiero</h3>
-        <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">Ver detalle →</span>
-      </button>
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        whileHover={{ y: -4 }}
+        className="neo-card overflow-hidden p-5 sm:p-6"
+      >
+        <button onClick={() => setShowDetail(true)} className="mb-6 flex w-full items-start justify-between text-left group">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Análisis</p>
+            <h3 className="mt-2 text-xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">Resumen financiero</h3>
+          </div>
+          <span className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors group-hover:text-primary">Ver detalle</span>
+        </button>
 
-      <div className="flex items-center justify-center mb-4">
-        <div className="relative">
-          <svg width="180" height="180" viewBox="0 0 180 180">
-            <circle cx="90" cy="90" r={radius1} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
-            <motion.circle
-              cx="90" cy="90" r={radius1} fill="none"
-              stroke="url(#incomeGrad)" strokeWidth="12"
-              strokeLinecap="round"
-              transform="rotate(-90 90 90)"
-              initial={{ strokeDasharray: circumference1, strokeDashoffset: circumference1 }}
-              animate={{ strokeDashoffset: circumference1 * (1 - incomeRatio) }}
-              transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
-            />
-            <circle cx="90" cy="90" r={radius2} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
-            <motion.circle
-              cx="90" cy="90" r={radius2} fill="none"
-              stroke="url(#expenseGrad)" strokeWidth="12"
-              strokeLinecap="round"
-              transform="rotate(-90 90 90)"
-              initial={{ strokeDasharray: circumference2, strokeDashoffset: circumference2 }}
-              animate={{ strokeDashoffset: circumference2 * (1 - expenseRatio) }}
-              transition={{ duration: 1.2, delay: 0.7, ease: "easeOut" }}
-            />
-            <circle cx="90" cy="90" r={radius3} fill="none" stroke="hsl(220, 14%, 92%)" strokeWidth="12" />
-            <motion.circle
-              cx="90" cy="90" r={radius3} fill="none"
-              stroke="url(#balanceGrad)" strokeWidth="12"
-              strokeLinecap="round"
-              transform="rotate(-90 90 90)"
-              initial={{ strokeDasharray: circumference3, strokeDashoffset: circumference3 }}
-              animate={{ strokeDashoffset: circumference3 * (1 - profitRatio) }}
-              transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
-            />
-            <defs>
-              <linearGradient id="incomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(211, 100%, 50%)" />
-                <stop offset="100%" stopColor="hsl(200, 100%, 60%)" />
-              </linearGradient>
-              <linearGradient id="expenseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(0, 84%, 55%)" />
-                <stop offset="100%" stopColor="hsl(15, 90%, 60%)" />
-              </linearGradient>
-              <linearGradient id="balanceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(177, 69%, 41%)" />
-                <stop offset="100%" stopColor="hsl(160, 70%, 50%)" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1, type: "spring", stiffness: 200 }}
-            className="absolute inset-0 flex flex-col items-center justify-center"
-          >
-            <span className="text-lg font-bold text-foreground">{fmt(balance)}</span>
-            <span className="text-xs text-muted-foreground">Balance</span>
-          </motion.div>
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <svg width="220" height="220" viewBox="0 0 180 180" className="drop-shadow-[0_16px_28px_hsl(var(--primary)/0.12)]">
+                <circle cx="90" cy="90" r={radius1} fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
+                <motion.circle
+                  cx="90" cy="90" r={radius1} fill="none"
+                  stroke="url(#incomeGrad)" strokeWidth="12"
+                  strokeLinecap="round"
+                  transform="rotate(-90 90 90)"
+                  initial={{ strokeDasharray: circumference1, strokeDashoffset: circumference1 }}
+                  animate={{ strokeDashoffset: circumference1 * (1 - incomeRatio) }}
+                  transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+                />
+                <circle cx="90" cy="90" r={radius2} fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
+                <motion.circle
+                  cx="90" cy="90" r={radius2} fill="none"
+                  stroke="url(#expenseGrad)" strokeWidth="12"
+                  strokeLinecap="round"
+                  transform="rotate(-90 90 90)"
+                  initial={{ strokeDasharray: circumference2, strokeDashoffset: circumference2 }}
+                  animate={{ strokeDashoffset: circumference2 * (1 - expenseRatio) }}
+                  transition={{ duration: 1.2, delay: 0.7, ease: "easeOut" }}
+                />
+                <circle cx="90" cy="90" r={radius3} fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
+                <motion.circle
+                  cx="90" cy="90" r={radius3} fill="none"
+                  stroke="url(#balanceGrad)" strokeWidth="12"
+                  strokeLinecap="round"
+                  transform="rotate(-90 90 90)"
+                  initial={{ strokeDasharray: circumference3, strokeDashoffset: circumference3 }}
+                  animate={{ strokeDashoffset: circumference3 * (1 - profitRatio) }}
+                  transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
+                />
+                <defs>
+                  <linearGradient id="incomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="hsl(var(--primary))" />
+                    <stop offset="100%" stopColor="hsl(193 100% 55%)" />
+                  </linearGradient>
+                  <linearGradient id="expenseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="hsl(var(--destructive))" />
+                    <stop offset="100%" stopColor="hsl(22 100% 56%)" />
+                  </linearGradient>
+                  <linearGradient id="balanceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="hsl(var(--secondary))" />
+                    <stop offset="100%" stopColor="hsl(168 78% 44%)" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, type: "spring", stiffness: 200 }}
+                className="absolute inset-0 flex flex-col items-center justify-center"
+              >
+                <span className="text-2xl font-extrabold tracking-tight text-foreground">{fmt(balance)}</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Balance</span>
+              </motion.div>
+            </div>
+          </div>
+
+          <div className="grid gap-3">
+            {[
+              { label: "Ingresos", value: totalIncome, tone: "text-primary", dot: "bg-primary" },
+              { label: "Gastos", value: totalExpenses, tone: "text-destructive", dot: "bg-destructive" },
+              { label: "Resultado neto", value: balance, tone: balance >= 0 ? "text-secondary" : "text-destructive", dot: balance >= 0 ? "bg-secondary" : "bg-destructive" },
+            ].map((item, index) => (
+              <motion.div key={item.label} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1 + index * 0.08 }} className="neo-inset flex items-center justify-between p-4">
+                <div className="flex items-center gap-3">
+                  <div className={`h-3 w-3 rounded-full ${item.dot}`} />
+                  <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                </div>
+                <p className={`text-lg font-extrabold tracking-tight ${item.tone}`}>{fmt(item.value)}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="flex justify-around text-center">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
-          <div className="w-2 h-2 rounded-full bg-primary mx-auto mb-1"></div>
-          <p className="text-xs text-muted-foreground">Ingresos</p>
-          <p className="text-sm font-bold text-primary">{fmt(totalIncome)}</p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-          <div className="w-2 h-2 rounded-full bg-destructive mx-auto mb-1"></div>
-          <p className="text-xs text-muted-foreground">Gastos</p>
-          <p className="text-sm font-bold text-destructive">{fmt(totalExpenses)}</p>
-        </motion.div>
-      </div>
-    </motion.div>
-    <FinancialDetailDialog open={showDetail} onClose={() => setShowDetail(false)} />
+      </motion.div>
+      <FinancialDetailDialog open={showDetail} onClose={() => setShowDetail(false)} />
     </>
   );
 };
