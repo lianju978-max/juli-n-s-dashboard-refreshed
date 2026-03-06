@@ -70,6 +70,10 @@ const TransactionHistory = () => {
     }
   };
 
+  const VISIBLE_COUNT = 5;
+  const allTxFlat = grouped.flatMap(([, txs]) => txs);
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <>
       <motion.div
