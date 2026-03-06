@@ -31,20 +31,20 @@ const AnnualProfits = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         whileHover={{ y: -4 }}
-        className="neo-card overflow-hidden p-5 sm:p-6"
+        className="neo-card overflow-hidden p-4 sm:p-5 lg:p-6"
       >
-        <button onClick={() => setShowDetail(true)} className="mb-6 flex w-full items-start justify-between text-left group">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Análisis</p>
-            <h3 className="mt-2 text-xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">Resumen financiero</h3>
+        <button onClick={() => setShowDetail(true)} className="mb-4 sm:mb-6 flex w-full items-start justify-between gap-2 text-left group">
+          <div className="min-w-0">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Análisis</p>
+            <h3 className="mt-1.5 sm:mt-2 text-base sm:text-xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">Resumen financiero</h3>
           </div>
-          <span className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors group-hover:text-primary">Ver detalle</span>
+          <span className="flex-shrink-0 rounded-full border border-border/60 bg-background/70 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-muted-foreground transition-colors group-hover:text-primary whitespace-nowrap">Ver detalle</span>
         </button>
 
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="flex items-center justify-center">
-            <div className="relative">
-              <svg width="220" height="220" viewBox="0 0 180 180" className="drop-shadow-[0_16px_28px_hsl(var(--primary)/0.12)]">
+            <div className="relative w-[160px] h-[160px] sm:w-[220px] sm:h-[220px]">
+              <svg width="100%" height="100%" viewBox="0 0 180 180" className="drop-shadow-[0_16px_28px_hsl(var(--primary)/0.12)]">
                 <circle cx="90" cy="90" r={radius1} fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
                 <motion.circle
                   cx="90" cy="90" r={radius1} fill="none"
@@ -96,24 +96,24 @@ const AnnualProfits = () => {
                 transition={{ delay: 1, type: "spring", stiffness: 200 }}
                 className="absolute inset-0 flex flex-col items-center justify-center"
               >
-                <span className="text-2xl font-extrabold tracking-tight text-foreground">{fmt(balance)}</span>
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Balance</span>
+                <span className="text-lg sm:text-2xl font-extrabold tracking-tight text-foreground">{fmt(balance)}</span>
+                <span className="text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] text-muted-foreground">Balance</span>
               </motion.div>
             </div>
           </div>
 
-          <div className="grid gap-3">
+          <div className="grid gap-2 sm:gap-3">
             {[
               { label: "Ingresos", value: totalIncome, tone: "text-primary", dot: "bg-primary" },
               { label: "Gastos", value: totalExpenses, tone: "text-destructive", dot: "bg-destructive" },
               { label: "Resultado neto", value: balance, tone: balance >= 0 ? "text-secondary" : "text-destructive", dot: balance >= 0 ? "bg-secondary" : "bg-destructive" },
             ].map((item, index) => (
-              <motion.div key={item.label} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1 + index * 0.08 }} className="neo-inset flex items-center justify-between p-4">
-                <div className="flex items-center gap-3">
-                  <div className={`h-3 w-3 rounded-full ${item.dot}`} />
-                  <p className="text-sm font-semibold text-foreground">{item.label}</p>
+              <motion.div key={item.label} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1 + index * 0.08 }} className="neo-inset flex items-center justify-between gap-2 p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full flex-shrink-0 ${item.dot}`} />
+                  <p className="text-xs sm:text-sm font-semibold text-foreground truncate">{item.label}</p>
                 </div>
-                <p className={`text-lg font-extrabold tracking-tight ${item.tone}`}>{fmt(item.value)}</p>
+                <p className={`text-sm sm:text-lg font-extrabold tracking-tight flex-shrink-0 ${item.tone}`}>{fmt(item.value)}</p>
               </motion.div>
             ))}
           </div>
