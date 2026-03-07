@@ -111,7 +111,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Nueva meta */}
-        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
           <div className="mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Nueva meta</span>
