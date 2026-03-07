@@ -19,7 +19,7 @@ const PaymentWidgets = () => {
   const maxVal = Math.max(...months.flatMap(([, v]) => [v.income, v.expense]), 1);
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+    <div className="grid gap-3 xl:grid-cols-[1.25fr_0.75fr]">
       <motion.div
         custom={0}
         variants={cardVariants}
