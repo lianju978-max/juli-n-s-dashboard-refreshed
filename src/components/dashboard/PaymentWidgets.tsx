@@ -43,8 +43,8 @@ const PaymentWidgets = () => {
           </div>
         </div>
 
-        <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
+        <div className="grid gap-2 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-3">
             {[
               { label: "Balance", value: balance, icon: CreditCard, tone: "gradient-blue" },
               { label: "Ingresos", value: totalIncome, icon: ArrowDownLeft, tone: "gradient-income" },
