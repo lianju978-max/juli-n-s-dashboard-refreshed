@@ -26,9 +26,9 @@ const PaymentWidgets = () => {
         initial="hidden"
         animate="visible"
         whileHover={{ y: -4 }}
-        className="neo-card overflow-hidden p-4 sm:p-5 lg:p-6"
+        className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5"
       >
-        <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Rendimiento</p>
             <h3 className="mt-1.5 sm:mt-2 text-lg sm:text-2xl font-extrabold tracking-tight text-foreground">Balance general</h3>
