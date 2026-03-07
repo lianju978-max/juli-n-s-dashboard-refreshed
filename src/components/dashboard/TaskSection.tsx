@@ -41,7 +41,7 @@ const TaskSection = ({ onAddTransaction }: Props) => {
       className="grid gap-3 xl:grid-cols-[1.35fr_0.75fr]"
     >
       <div className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5">
-        <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0 max-w-xl">
             <p className="mb-1.5 sm:mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.28em] text-muted-foreground">Centro de control</p>
             <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-foreground leading-tight">
