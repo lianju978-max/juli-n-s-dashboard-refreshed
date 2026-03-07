@@ -41,7 +41,7 @@ const AnnualProfits = () => {
           <span className="flex-shrink-0 rounded-full border border-border/60 bg-background/70 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-muted-foreground transition-colors group-hover:text-primary whitespace-nowrap">Ver detalle</span>
         </button>
 
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="grid gap-3 sm:gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="flex items-center justify-center">
             <div className="relative w-[160px] h-[160px] sm:w-[220px] sm:h-[220px]">
               <svg width="100%" height="100%" viewBox="0 0 180 180" className="drop-shadow-[0_16px_28px_hsl(var(--primary)/0.12)]">

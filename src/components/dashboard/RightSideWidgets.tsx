@@ -123,7 +123,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Estado financiero */}
-        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
           <span className="mb-2 sm:mb-3 block text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Estado financiero</span>
           <div className="flex items-center gap-1 sm:gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => {

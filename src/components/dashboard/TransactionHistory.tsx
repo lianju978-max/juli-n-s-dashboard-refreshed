@@ -120,7 +120,7 @@ const TransactionHistory = () => {
           ))}
         </div>
 
-        <div className="mb-4 sm:mb-5 grid gap-2 sm:gap-3 grid-cols-3">
+        <div className="mb-3 sm:mb-4 grid gap-2 grid-cols-3">
           <div className="neo-inset p-2 sm:p-3 text-center">
             <p className="text-[8px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.16em] text-muted-foreground">Ingresos</p>
             <p className="mt-0.5 sm:mt-1 text-sm sm:text-lg font-extrabold text-primary truncate">${fmt(totalIncome)}</p>

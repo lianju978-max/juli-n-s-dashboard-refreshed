@@ -63,8 +63,8 @@ const TaskSection = ({ onAddTransaction }: Props) => {
           </motion.button>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="neo-inset p-3 sm:p-4 lg:p-5">
+        <div className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="neo-inset p-2.5 sm:p-3 lg:p-4">
             <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
               <div className="min-w-0">
                 <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-muted-foreground">Semana actual</p>

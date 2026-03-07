@@ -109,7 +109,7 @@ const PaymentWidgets = () => {
           { label: "Salida total", value: totalExpenses, helper: "Egresos acumulados", tone: "text-destructive", bg: "gradient-expense" },
           { label: "Resultado neto", value: balance, helper: "Lo que realmente queda", tone: balance >= 0 ? "text-secondary" : "text-destructive", bg: balance >= 0 ? "gradient-balance" : "gradient-expense" },
         ].map((card, index) => (
-          <motion.div key={card.label} custom={index + 1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+          <motion.div key={card.label} custom={index + 1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
             <div className={`${card.bg} mb-3 sm:mb-4 flex h-9 w-9 sm:h-11 sm:w-11 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl text-primary-foreground shadow-[var(--shadow-floating)]`}>
               <CreditCard className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
