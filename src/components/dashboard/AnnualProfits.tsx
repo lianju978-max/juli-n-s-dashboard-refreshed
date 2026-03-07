@@ -33,7 +33,7 @@ const AnnualProfits = () => {
         whileHover={{ y: -4 }}
         className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5"
       >
-        <button onClick={() => setShowDetail(true)} className="mb-4 sm:mb-6 flex w-full items-start justify-between gap-2 text-left group">
+        <button onClick={() => setShowDetail(true)} className="mb-3 sm:mb-4 flex w-full items-start justify-between gap-2 text-left group">
           <div className="min-w-0">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Análisis</p>
             <h3 className="mt-1.5 sm:mt-2 text-base sm:text-xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">Resumen financiero</h3>
