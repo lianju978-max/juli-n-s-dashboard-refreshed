@@ -80,7 +80,7 @@ const TransactionHistory = () => {
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="neo-card flex flex-1 flex-col overflow-hidden p-4 sm:p-5 lg:p-6"
+        className="neo-card flex flex-1 flex-col overflow-hidden p-3 sm:p-4 lg:p-5"
       >
         <div className="mb-4 sm:mb-5 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
