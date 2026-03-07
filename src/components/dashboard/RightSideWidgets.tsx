@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Lock, TrendingUp, Wallet, Star, Target, Plus, Pencil, Trash2 } from "lucide-react";
+import { TrendingUp, Wallet, Star, Target, Plus, Pencil, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSavingsGoals, useFinanceSummary, useDeleteSavingsGoal } from "@/hooks/useFinanceData";
 import EditSavingsGoalDialog from "./EditSavingsGoalDialog";
@@ -66,28 +66,8 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
           </div>
         </motion.div>
 
-        {/* Resumen rápido */}
-        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
-          <div className="mb-3 sm:mb-4 flex items-center gap-2">
-            <Lock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Resumen rápido</span>
-          </div>
-          <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-            {[
-              { val: `$${(totalIncome / 1000).toFixed(1)}K`, label: "Ingresos" },
-              { val: `$${(totalExpenses / 1000).toFixed(1)}K`, label: "Gastos" },
-              { val: `$${(balance / 1000).toFixed(1)}K`, label: "Balance" },
-            ].map((t, i) => (
-              <motion.div key={t.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 + i * 0.1 }} className="neo-inset rounded-lg sm:rounded-[1rem] p-2 sm:p-3 text-center">
-                <p className="text-xs sm:text-base font-extrabold text-foreground truncate">{t.val}</p>
-                <p className="text-[8px] sm:text-[10px] text-muted-foreground">{t.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Metas de ahorro */}
-        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 sm:col-span-2 xl:col-span-1">
+        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 sm:col-span-2 xl:col-span-1">
           <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Target className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
@@ -131,7 +111,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Nueva meta */}
-        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
           <div className="mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Nueva meta</span>
@@ -143,7 +123,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Estado financiero */}
-        <motion.div custom={4} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
           <span className="mb-2 sm:mb-3 block text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Estado financiero</span>
           <div className="flex items-center gap-1 sm:gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => {
