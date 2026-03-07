@@ -38,7 +38,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
 
   return (
     <>
-      <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-1 xl:sticky xl:top-4">
+      <div className="grid gap-2 sm:gap-3 sm:grid-cols-2 xl:grid-cols-1 xl:sticky xl:top-3">
         {/* Tasa de ahorro */}
         <motion.div custom={0} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card overflow-hidden p-4 sm:p-5">
           <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
