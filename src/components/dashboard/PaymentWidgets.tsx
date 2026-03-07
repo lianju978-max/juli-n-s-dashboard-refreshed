@@ -103,7 +103,7 @@ const PaymentWidgets = () => {
         </div>
       </motion.div>
 
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3 xl:grid-cols-1">
+      <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3 xl:grid-cols-1">
         {[
           { label: "Entrada total", value: totalIncome, helper: "Flujo acumulado", tone: "text-primary", bg: "gradient-income" },
           { label: "Salida total", value: totalExpenses, helper: "Egresos acumulados", tone: "text-destructive", bg: "gradient-expense" },
