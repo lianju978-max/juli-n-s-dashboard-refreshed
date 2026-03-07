@@ -31,7 +31,7 @@ const AnnualProfits = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         whileHover={{ y: -4 }}
-        className="neo-card overflow-hidden p-4 sm:p-5 lg:p-6"
+        className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5"
       >
         <button onClick={() => setShowDetail(true)} className="mb-4 sm:mb-6 flex w-full items-start justify-between gap-2 text-left group">
           <div className="min-w-0">
