@@ -67,7 +67,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Metas de ahorro */}
-        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 sm:col-span-2 xl:col-span-1">
+        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4 sm:col-span-2 xl:col-span-1">
           <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Target className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
