@@ -62,7 +62,7 @@ const PaymentWidgets = () => {
             ))}
           </div>
 
-          <div className="neo-inset p-3 sm:p-4">
+          <div className="neo-inset p-2.5 sm:p-3">
             <div className="mb-3 sm:mb-4 flex items-center gap-2">
               <ChartNoAxesCombined className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
               <div className="min-w-0">
