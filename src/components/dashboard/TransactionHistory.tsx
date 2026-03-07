@@ -80,9 +80,9 @@ const TransactionHistory = () => {
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="neo-card flex flex-1 flex-col overflow-hidden p-3 sm:p-4 lg:p-5"
+        className="neo-card flex flex-1 flex-col overflow-hidden p-4 sm:p-5 lg:p-6"
       >
-        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-4 sm:mb-5 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Movimientos</p>
             <h3 className="mt-1.5 sm:mt-2 text-base sm:text-xl font-extrabold tracking-tight text-foreground">Historial de registros</h3>
@@ -120,7 +120,7 @@ const TransactionHistory = () => {
           ))}
         </div>
 
-        <div className="mb-3 sm:mb-4 grid gap-2 grid-cols-3">
+        <div className="mb-4 sm:mb-5 grid gap-2 sm:gap-3 grid-cols-3">
           <div className="neo-inset p-2 sm:p-3 text-center">
             <p className="text-[8px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.16em] text-muted-foreground">Ingresos</p>
             <p className="mt-0.5 sm:mt-1 text-sm sm:text-lg font-extrabold text-primary truncate">${fmt(totalIncome)}</p>

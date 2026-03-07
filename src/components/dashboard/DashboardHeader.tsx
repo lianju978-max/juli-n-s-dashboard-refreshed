@@ -15,7 +15,7 @@ const DashboardHeader = ({ onAddTransaction }: Props) => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="neo-card relative z-10 mx-1 overflow-hidden px-3 py-2.5 sm:mx-2 sm:px-4 sm:py-3 lg:mx-3 lg:px-5 lg:py-3.5"
+      className="neo-card relative z-10 mx-2 overflow-hidden px-3 py-3 sm:mx-4 sm:px-5 sm:py-4 lg:mx-6 lg:px-6 lg:py-5"
     >
       <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-primary/10 to-transparent" />
       <div className="relative flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-center lg:justify-between">
