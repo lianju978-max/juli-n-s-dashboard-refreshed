@@ -19,16 +19,16 @@ const PaymentWidgets = () => {
   const maxVal = Math.max(...months.flatMap(([, v]) => [v.income, v.expense]), 1);
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+    <div className="grid gap-3 xl:grid-cols-[1.25fr_0.75fr]">
       <motion.div
         custom={0}
         variants={cardVariants}
         initial="hidden"
         animate="visible"
         whileHover={{ y: -4 }}
-        className="neo-card overflow-hidden p-4 sm:p-5 lg:p-6"
+        className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5"
       >
-        <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Rendimiento</p>
             <h3 className="mt-1.5 sm:mt-2 text-lg sm:text-2xl font-extrabold tracking-tight text-foreground">Balance general</h3>
@@ -43,8 +43,8 @@ const PaymentWidgets = () => {
           </div>
         </div>
 
-        <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
+        <div className="grid gap-2 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-3">
             {[
               { label: "Balance", value: balance, icon: CreditCard, tone: "gradient-blue" },
               { label: "Ingresos", value: totalIncome, icon: ArrowDownLeft, tone: "gradient-income" },
@@ -62,7 +62,7 @@ const PaymentWidgets = () => {
             ))}
           </div>
 
-          <div className="neo-inset p-3 sm:p-4">
+          <div className="neo-inset p-2.5 sm:p-3">
             <div className="mb-3 sm:mb-4 flex items-center gap-2">
               <ChartNoAxesCombined className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
               <div className="min-w-0">
@@ -103,13 +103,13 @@ const PaymentWidgets = () => {
         </div>
       </motion.div>
 
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3 xl:grid-cols-1">
+      <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3 xl:grid-cols-1">
         {[
           { label: "Entrada total", value: totalIncome, helper: "Flujo acumulado", tone: "text-primary", bg: "gradient-income" },
           { label: "Salida total", value: totalExpenses, helper: "Egresos acumulados", tone: "text-destructive", bg: "gradient-expense" },
           { label: "Resultado neto", value: balance, helper: "Lo que realmente queda", tone: balance >= 0 ? "text-secondary" : "text-destructive", bg: balance >= 0 ? "gradient-balance" : "gradient-expense" },
         ].map((card, index) => (
-          <motion.div key={card.label} custom={index + 1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+          <motion.div key={card.label} custom={index + 1} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
             <div className={`${card.bg} mb-3 sm:mb-4 flex h-9 w-9 sm:h-11 sm:w-11 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl text-primary-foreground shadow-[var(--shadow-floating)]`}>
               <CreditCard className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>

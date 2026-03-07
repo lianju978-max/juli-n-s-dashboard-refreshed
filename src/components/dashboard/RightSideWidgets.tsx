@@ -38,9 +38,9 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
 
   return (
     <>
-      <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-1 xl:sticky xl:top-4">
+      <div className="grid gap-2 sm:gap-3 sm:grid-cols-2 xl:grid-cols-1 xl:sticky xl:top-3">
         {/* Tasa de ahorro */}
-        <motion.div custom={0} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card overflow-hidden p-4 sm:p-5">
+        <motion.div custom={0} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card overflow-hidden p-3 sm:p-4">
           <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Tasa de ahorro</span>
             <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
@@ -67,7 +67,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Metas de ahorro */}
-        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5 sm:col-span-2 xl:col-span-1">
+        <motion.div custom={1} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4 sm:col-span-2 xl:col-span-1">
           <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Target className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
@@ -111,7 +111,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Nueva meta */}
-        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={2} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
           <div className="mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Nueva meta</span>
@@ -123,7 +123,7 @@ const RightSideWidgets = ({ onAddGoal }: Props) => {
         </motion.div>
 
         {/* Estado financiero */}
-        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-4 sm:p-5">
+        <motion.div custom={3} variants={widgetVariants} initial="hidden" animate="visible" whileHover={{ y: -3 }} className="neo-card p-3 sm:p-4">
           <span className="mb-2 sm:mb-3 block text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-muted-foreground">Estado financiero</span>
           <div className="flex items-center gap-1 sm:gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => {

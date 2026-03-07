@@ -13,15 +13,15 @@ const Index = () => {
   const [showGoalDialog, setShowGoalDialog] = useState(false);
 
   return (
-    <div className="dashboard-shell min-h-screen bg-background px-2 py-3 sm:px-4 sm:py-4">
-      <div className="mx-auto max-w-[1440px] space-y-3 sm:space-y-4 lg:space-y-5">
+    <div className="dashboard-shell min-h-screen bg-background px-2 py-2 sm:px-3 sm:py-3">
+      <div className="mx-auto max-w-[1440px] space-y-2 sm:space-y-3">
         <DashboardHeader onAddTransaction={() => setShowTxDialog(true)} />
 
-        <div className="grid gap-3 sm:gap-4 px-2 sm:px-0 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="space-y-3 sm:space-y-4 min-w-0 overflow-hidden">
+        <div className="grid gap-2 sm:gap-3 px-1 sm:px-0 xl:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="space-y-2 sm:space-y-3 min-w-0 overflow-hidden">
             <TaskSection onAddTransaction={() => setShowTxDialog(true)} />
             <PaymentWidgets />
-            <div className="grid gap-3 sm:gap-4 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+            <div className="grid gap-2 sm:gap-3 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
               <AnnualProfits />
               <TransactionHistory />
             </div>
