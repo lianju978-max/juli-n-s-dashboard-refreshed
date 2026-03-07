@@ -38,9 +38,9 @@ const TaskSection = ({ onAddTransaction }: Props) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="grid gap-4 xl:grid-cols-[1.35fr_0.75fr]"
+      className="grid gap-3 xl:grid-cols-[1.35fr_0.75fr]"
     >
-      <div className="neo-card overflow-hidden p-4 sm:p-5 lg:p-6">
+      <div className="neo-card overflow-hidden p-3 sm:p-4 lg:p-5">
         <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0 max-w-xl">
             <p className="mb-1.5 sm:mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.28em] text-muted-foreground">Centro de control</p>
