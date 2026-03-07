@@ -82,7 +82,7 @@ const TransactionHistory = () => {
         transition={{ duration: 0.5, delay: 0.35 }}
         className="neo-card flex flex-1 flex-col overflow-hidden p-3 sm:p-4 lg:p-5"
       >
-        <div className="mb-4 sm:mb-5 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-muted-foreground">Movimientos</p>
             <h3 className="mt-1.5 sm:mt-2 text-base sm:text-xl font-extrabold tracking-tight text-foreground">Historial de registros</h3>
