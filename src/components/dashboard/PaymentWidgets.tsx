@@ -46,20 +46,20 @@ const PaymentWidgets = () => {
         <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
             {[
-              { label: "Balance", value: balance, icon: CreditCard, tone: "gradient-blue" },
-              { label: "Ingresos", value: totalIncome, icon: ArrowDownLeft, tone: "gradient-income" },
-              { label: "Gastos", value: totalExpenses, icon: ArrowUpRight, tone: "gradient-expense" },
-            ].map(({ label, value, icon: Icon, tone }, i) => (
-              <motion.div key={label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 + i * 0.08 }} className="neo-inset p-3 sm:p-4">
-                <div className="mb-2 sm:mb-4 flex items-center justify-between">
-                  <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-muted-foreground">{label}</span>
-                  <div className={`${tone} flex h-7 w-7 sm:h-9 sm:w-9 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl text-primary-foreground`}>
-                    <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </div>
-                </div>
-                <p className="text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-foreground break-all">${fmt(value)}</p>
-              </motion.div>
-            ))}
+               { label: "Balance", value: balance, icon: CreditCard, tone: "gradient-blue" },
+               { label: "Ingresos", value: totalIncome, icon: ArrowDownLeft, tone: "gradient-income" },
+               { label: "Gastos", value: totalExpenses, icon: ArrowUpRight, tone: "gradient-expense" },
+             ].map(({ label, value, icon: Icon, tone }, i) => (
+               <motion.div key={label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 + i * 0.08 }} className="neo-inset p-3 sm:p-4">
+                 <div className="mb-2 sm:mb-4 flex items-center justify-between">
+                   <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-muted-foreground">{label}</span>
+                   <div className={`${tone} flex h-7 w-7 sm:h-9 sm:w-9 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl text-primary-foreground`}>
+                     <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                   </div>
+                 </div>
+                 <p className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-extrabold tracking-tight text-foreground line-clamp-2">${fmt(value)}</p>
+               </motion.div>
+             ))}
           </div>
 
           <div className="neo-inset p-3 sm:p-4">
